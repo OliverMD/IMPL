@@ -1,0 +1,3 @@
+module Test_2_4 where
+import Test.QuickCheck
+import Solution_2_4

@@ -1,0 +1,764 @@
+olivermd@ubuntu:~/Sorting/Insertion$ ls
+insertion.c  #insertion.go#  insertion.go  insertion.hs  insertion.py
+olivermd@ubuntu:~/Sorting/Insertion$ cd ..
+olivermd@ubuntu:~/Sorting$ ls
+Insertion  README.md  Selection
+olivermd@ubuntu:~/Sorting$ cd Selection
+olivermd@ubuntu:~/Sorting/Selection$ ls
+selection.c  selection.c~  selection.py
+olivermd@ubuntu:~/Sorting/Selection$ gcc 
+gcc: fatal error: no input files
+compilation terminated.
+olivermd@ubuntu:~/Sorting/Selection$ gcc help
+gcc: error: help: No such file or directory
+gcc: fatal error: no input files
+compilation terminated.
+olivermd@ubuntu:~/Sorting/Selection$ gcc selection.c -o selection
+selection.c:19:6: warning: conflicting types for ‘swap’
+ void swap(int *left, int *right){
+      ^
+selection.c:15:7: note: previous implicit declaration of ‘swap’ was here
+       swap(&(list[i]), min);
+       ^
+olivermd@ubuntu:~/Sorting/Selection$ gcc selection.c -o selection
+olivermd@ubuntu:~/Sorting/Selection$ ./selection
+olivermd@ubuntu:~/Sorting/Selection$ gcc selection.c -o selection
+olivermd@ubuntu:~/Sorting/Selection$ ./selection
+4, 3, 2, 1;olivermd@ubuntu:~/Sorting/Selection$ gcc selection.c -o selection
+olivermd@ubuntu:~/Sorting/Selection$ ./selection
+4, 3, 2, 1;
+olivermd@ubuntu:~/Sorting/Selection$ gcc selection.c -o selection
+olivermd@ubuntu:~/Sorting/Selection$ ./selection
+4, 3, 2, 1;
+4, 3, 2, 1;
+olivermd@ubuntu:~/Sorting/Selection$ gcc selection.c -o selection
+olivermd@ubuntu:~/Sorting/Selection$ ./selection
+4, 3, 2, 1;
+1, 2, 3, 4;
+olivermd@ubuntu:~/Sorting/Selection$ gcc -Werrorselection.c -o selection                                                                                                  
+gcc: error: unrecognized command line option ‘-Werrorselection.c’
+gcc: fatal error: no input files
+compilation terminated.
+olivermd@ubuntu:~/Sorting/Selection$ gcc -Werror selection.c -o selection                                                                                                 
+olivermd@ubuntu:~/Sorting/Selection$ gcc -Wextra selection.c -o selection                                                                                                 
+olivermd@ubuntu:~/Sorting/Selection$ gcc -Wextra - Wall selection.c -o selection                                                                                          
+gcc: error: Wall: No such file or directory
+olivermd@ubuntu:~/Sorting/Selection$ gcc -Wextra -Wall selection.c -o selection
+selection.c: In function ‘main’:
+selection.c:12:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+olivermd@ubuntu:~/Sorting/Selection$ gcc -Wextra -Wall selection.c -o selection
+selection.c: In function ‘main’:
+selection.c:12:3: warning: ‘return’ with no value, in function returning non-void [-Wreturn-type]
+   return;
+   ^
+olivermd@ubuntu:~/Sorting/Selection$ gcc -Wextra -Wall selection.c -o selection
+olivermd@ubuntu:~/Sorting/Selection$ cc
+cc: fatal error: no input files
+compilation terminated.
+olivermd@ubuntu:~/Sorting/Selection$ ls
+selection  selection.c  selection.c~  selection.py
+olivermd@ubuntu:~/Sorting/Selection$ gcc -Wextra -Wall -c99 selection.c -o selection                                                                                      
+gcc: error: unrecognized command line option ‘-c99’
+olivermd@ubuntu:~/Sorting/Selection$ gcc -Wextra -Wall -std=c99 selection.c -o selection                                                                                  
+olivermd@ubuntu:~/Sorting/Selection$ ls
+selection  selection.c  selection.c~  selection.py
+olivermd@ubuntu:~/Sorting/Selection$ cd ..
+olivermd@ubuntu:~/Sorting$ cd ..
+olivermd@ubuntu:~$ ls
+Desktop  Documents  Downloads  examples.desktop  Hask  Music  Pictures  Public  Sorting  Templates  Videos
+olivermd@ubuntu:~$ mkdir IMPL
+olivermd@ubuntu:~$ cd IMPL
+olivermd@ubuntu:~/IMPL$ ghci
+GHCi, version 7.8.4: http://www.haskell.org/ghc/  :? for help
+Loading package ghc-prim ... linking ... done.
+Loading package integer-gmp ... linking ... done.
+Loading package base ... linking ... done.
+Prelude> :?
+ Commands available from the prompt:
+
+   <statement>                 evaluate/run <statement>
+   :                           repeat last command
+   :{\n ..lines.. \n:}\n       multiline command
+   :add [*]<module> ...        add module(s) to the current target set
+   :browse[!] [[*]<mod>]       display the names defined by module <mod>
+                               (!: more details; *: all top-level names)
+   :cd <dir>                   change directory to <dir>
+   :cmd <expr>                 run the commands returned by <expr>::IO String
+   :complete <dom> [<rng>] <s> list completions for partial input string
+   :ctags[!] [<file>]          create tags file for Vi (default: "tags")
+                               (!: use regex instead of line number)
+   :def <cmd> <expr>           define command :<cmd> (later defined command has
+                               precedence, ::<cmd> is always a builtin command)
+   :edit <file>                edit file
+   :edit                       edit last module
+   :etags [<file>]             create tags file for Emacs (default: "TAGS")
+   :help, :?                   display this list of commands
+   :info[!] [<name> ...]       display information about the given names
+                               (!: do not filter instances)
+   :issafe [<mod>]             display safe haskell information of module <mod>
+   :kind[!] <type>             show the kind of <type>
+                               (!: also print the normalised type)
+   :load [*]<module> ...       load module(s) and their dependents
+   :main [<arguments> ...]     run the main function with the given arguments
+   :module [+/-] [*]<mod> ...  set the context for expression evaluation
+   :quit                       exit GHCi
+   :reload                     reload the current module set
+   :run function [<arguments> ...] run the function with the given arguments
+   :script <filename>          run the script <filename>
+   :type <expr>                show the type of <expr>
+   :undef <cmd>                undefine user-defined command :<cmd>
+   :!<command>                 run the shell command <command>
+
+ -- Commands for debugging:
+
+   :abandon                    at a breakpoint, abandon current computation
+   :back                       go back in the history (after :trace)
+   :break [<mod>] <l> [<col>]  set a breakpoint at the specified location
+   :break <name>               set a breakpoint on the specified function
+   :continue                   resume after a breakpoint
+   :delete <number>            delete the specified breakpoint
+   :delete *                   delete all breakpoints
+   :force <expr>               print <expr>, forcing unevaluated parts
+   :forward                    go forward in the history (after :back)
+   :history [<n>]              after :trace, show the execution history
+   :list                       show the source code around current breakpoint
+   :list <identifier>          show the source code for <identifier>
+   :list [<module>] <line>     show the source code around line number <line>
+   :print [<name> ...]         prints a value without forcing its computation
+   :sprint [<name> ...]        simplifed version of :print
+   :step                       single-step after stopping at a breakpoint
+   :step <expr>                single-step into <expr>
+   :steplocal                  single-step within the current top-level binding
+   :stepmodule                 single-step restricted to the current module
+   :trace                      trace after stopping at a breakpoint
+   :trace <expr>               evaluate <expr> with tracing on (see :history)
+
+ -- Commands for changing settings:
+
+   :set <option> ...           set options
+   :seti <option> ...          set options for interactive evaluation only
+   :set args <arg> ...         set the arguments returned by System.getArgs
+   :set prog <progname>        set the value returned by System.getProgName
+   :set prompt <prompt>        set the prompt used in GHCi
+   :set prompt2 <prompt>       set the continuation prompt used in GHCi
+   :set editor <cmd>           set the command used for :edit
+   :set stop [<n>] <cmd>       set the command to run when a breakpoint is hit
+   :unset <option> ...         unset options
+
+  Options for ':set' and ':unset':
+
+    +m            allow multiline commands
+    +r            revert top-level expressions after each evaluation
+    +s            print timing/memory stats after each evaluation
+    +t            print type after evaluation
+    -<flags>      most GHC command line flags can also be set here
+                         (eg. -v2, -XFlexibleInstances, etc.)
+                    for GHCi-specific flags, see User's Guide,
+                    Flag reference, Interactive-mode options
+
+ -- Commands for displaying information:
+
+   :show bindings              show the current bindings made at the prompt
+   :show breaks                show the active breakpoints
+   :show context               show the breakpoint context
+   :show imports               show the current imports
+   :show linker                show current linker state
+   :show modules               show the currently loaded modules
+   :show packages              show the currently active package flags
+   :show paths                 show the currently active search paths
+   :show language              show the currently active language flags
+   :show <setting>             show value of <setting>, which is one of
+                                  [args, prog, prompt, editor, stop]
+   :showi language             show language flags for interactive evaluation
+
+Prelude> 2+3*4
+14
+Prelude> 2*pi*5
+31.41592653589793
+Prelude> 2+3 /= 3+2
+False
+Prelude> 2 /= 3+2
+True
+Prelude> 'C':"ompiler"
+"Compiler"
+Prelude> "The string \"Hello\" has " ++ show(length "hello") ++ " characters"
+"The string \"Hello\" has 5 characters"
+Prelude> "The string "Hello" has " ++ show(length "hello") ++ " characters"
+
+<interactive>:9:14: Not in scope: data constructor ‘Hello’
+Prelude> "The string /"Hello/" has " ++ show(length "hello") ++ " characters"
+
+<interactive>:10:15: Not in scope: data constructor ‘Hello’
+Prelude> "The string \"Hello\" has " ++ show(length "hello") ++ " characters"
+"The string \"Hello\" has 5 characters"
+Prelude> "The string \"Hello!\" has " ++ show(length "hello") ++ " characters"
+"The string \"Hello!\" has 5 characters"
+Prelude> :load answers2
+target ‘answers2’ is not a module name or a source file
+Prelude> :load answers2.hs
+
+<no location info>: can't find file: answers2.hs
+Failed, modules loaded: none.
+Prelude> :load solution2
+target ‘solution2’ is not a module name or a source file
+Prelude> :ls
+unknown command ':ls'
+use :? for help.
+Prelude> ;?
+
+<interactive>:17:1: parse error on input ‘;’
+Prelude> :?
+ Commands available from the prompt:
+
+   <statement>                 evaluate/run <statement>
+   :                           repeat last command
+   :{\n ..lines.. \n:}\n       multiline command
+   :add [*]<module> ...        add module(s) to the current target set
+   :browse[!] [[*]<mod>]       display the names defined by module <mod>
+                               (!: more details; *: all top-level names)
+   :cd <dir>                   change directory to <dir>
+   :cmd <expr>                 run the commands returned by <expr>::IO String
+   :complete <dom> [<rng>] <s> list completions for partial input string
+   :ctags[!] [<file>]          create tags file for Vi (default: "tags")
+                               (!: use regex instead of line number)
+   :def <cmd> <expr>           define command :<cmd> (later defined command has
+                               precedence, ::<cmd> is always a builtin command)
+   :edit <file>                edit file
+   :edit                       edit last module
+   :etags [<file>]             create tags file for Emacs (default: "TAGS")
+   :help, :?                   display this list of commands
+   :info[!] [<name> ...]       display information about the given names
+                               (!: do not filter instances)
+   :issafe [<mod>]             display safe haskell information of module <mod>
+   :kind[!] <type>             show the kind of <type>
+                               (!: also print the normalised type)
+   :load [*]<module> ...       load module(s) and their dependents
+   :main [<arguments> ...]     run the main function with the given arguments
+   :module [+/-] [*]<mod> ...  set the context for expression evaluation
+   :quit                       exit GHCi
+   :reload                     reload the current module set
+   :run function [<arguments> ...] run the function with the given arguments
+   :script <filename>          run the script <filename>
+   :type <expr>                show the type of <expr>
+   :undef <cmd>                undefine user-defined command :<cmd>
+   :!<command>                 run the shell command <command>
+
+ -- Commands for debugging:
+
+   :abandon                    at a breakpoint, abandon current computation
+   :back                       go back in the history (after :trace)
+   :break [<mod>] <l> [<col>]  set a breakpoint at the specified location
+   :break <name>               set a breakpoint on the specified function
+   :continue                   resume after a breakpoint
+   :delete <number>            delete the specified breakpoint
+   :delete *                   delete all breakpoints
+   :force <expr>               print <expr>, forcing unevaluated parts
+   :forward                    go forward in the history (after :back)
+   :history [<n>]              after :trace, show the execution history
+   :list                       show the source code around current breakpoint
+   :list <identifier>          show the source code for <identifier>
+   :list [<module>] <line>     show the source code around line number <line>
+   :print [<name> ...]         prints a value without forcing its computation
+   :sprint [<name> ...]        simplifed version of :print
+   :step                       single-step after stopping at a breakpoint
+   :step <expr>                single-step into <expr>
+   :steplocal                  single-step within the current top-level binding
+   :stepmodule                 single-step restricted to the current module
+   :trace                      trace after stopping at a breakpoint
+   :trace <expr>               evaluate <expr> with tracing on (see :history)
+
+ -- Commands for changing settings:
+
+   :set <option> ...           set options
+   :seti <option> ...          set options for interactive evaluation only
+   :set args <arg> ...         set the arguments returned by System.getArgs
+   :set prog <progname>        set the value returned by System.getProgName
+   :set prompt <prompt>        set the prompt used in GHCi
+   :set prompt2 <prompt>       set the continuation prompt used in GHCi
+   :set editor <cmd>           set the command used for :edit
+   :set stop [<n>] <cmd>       set the command to run when a breakpoint is hit
+   :unset <option> ...         unset options
+
+  Options for ':set' and ':unset':
+
+    +m            allow multiline commands
+    +r            revert top-level expressions after each evaluation
+    +s            print timing/memory stats after each evaluation
+    +t            print type after evaluation
+    -<flags>      most GHC command line flags can also be set here
+                         (eg. -v2, -XFlexibleInstances, etc.)
+                    for GHCi-specific flags, see User's Guide,
+                    Flag reference, Interactive-mode options
+
+ -- Commands for displaying information:
+
+   :show bindings              show the current bindings made at the prompt
+   :show breaks                show the active breakpoints
+   :show context               show the breakpoint context
+   :show imports               show the current imports
+   :show linker                show current linker state
+   :show modules               show the currently loaded modules
+   :show packages              show the currently active package flags
+   :show paths                 show the currently active search paths
+   :show language              show the currently active language flags
+   :show <setting>             show value of <setting>, which is one of
+                                  [args, prog, prompt, editor, stop]
+   :showi language             show language flags for interactive evaluation
+
+Prelude> :load answers_2.hs
+
+answers_2.hs:6:8: parse error on input ‘solution2’
+Failed, modules loaded: none.
+Prelude> :load answers_2.hs
+
+answers_2.hs:6:8: parse error on input ‘answers_2’
+Failed, modules loaded: none.
+Prelude> :load answers_2.hs
+
+answers_2.hs:1:8: parse error on input ‘answers_2’
+Failed, modules loaded: none.
+Prelude> :exit
+unknown command ':exit'
+use :? for help.
+Prelude> :quit
+Leaving GHCi.
+olivermd@ubuntu:~/IMPL$ ls
+answers_2.hs  answers_2.hs~
+olivermd@ubuntu:~/IMPL$ ghci
+GHCi, version 7.8.4: http://www.haskell.org/ghc/  :? for help
+Loading package ghc-prim ... linking ... done.
+Loading package integer-gmp ... linking ... done.
+Loading package base ... linking ... done.
+Prelude> :load answers_2.hs
+
+answers_2.hs:1:8: parse error on input ‘answers_2’
+Failed, modules loaded: none.
+Prelude> :load answers_2.hs
+
+answers_2.hs:1:8: parse error on input ‘answers’
+Failed, modules loaded: none.
+Prelude> :load answers_2.hs
+[1 of 1] Compiling Main             ( answers_2.hs, interpreted )
+Ok, modules loaded: Main.
+*Main> sum3 1 2 3
+6
+*Main> :load answers_2.hs
+
+answers_2.hs:7:8: parse error on input ‘solutions’
+Failed, modules loaded: none.
+Prelude> :load answers_2.hs
+
+answers_2.hs:1:8: parse error on input ‘solutions’
+Failed, modules loaded: none.
+Prelude> :load answers_2.hs
+
+answers_2.hs:1:8: parse error on input ‘answers_2’
+Failed, modules loaded: none.
+Prelude> :load answers_2.hs
+[1 of 1] Compiling Answers_2        ( answers_2.hs, interpreted )
+Ok, modules loaded: Answers_2.
+*Answers_2> :load answers_2.hs
+[1 of 1] Compiling Answers_2        ( answers_2.hs, interpreted )
+Ok, modules loaded: Answers_2.
+*Answers_2> median Int 1 2 3
+
+<interactive>:11:1: Not in scope: ‘median’
+
+<interactive>:11:8: Not in scope: data constructor ‘Int’
+*Answers_2> medianInt 1 2 3
+2
+*Answers_2> medianInt 1 3 2
+2
+*Answers_2> medianInt 2 1 3
+2
+*Answers_2> medianInt 2 3 1
+2
+*Answers_2> medianInt 3 2 1
+2
+*Answers_2> medianInt 3 1 2
+2
+*Answers_2> :load answers_2.hs
+[1 of 1] Compiling Answers_2        ( answers_2.hs, interpreted )
+
+answers_2.hs:16:10:
+    The type signature for ‘somezero’ lacks an accompanying binding
+Failed, modules loaded: none.
+Prelude> :load answers_2.hs
+[1 of 1] Compiling Answers_2        ( answers_2.hs, interpreted )
+Ok, modules loaded: Answers_2.
+*Answers_2> allzero [1,2,3,4,0]
+False
+*Answers_2> allzero [0,0,0,0]
+*** Exception: answers_2.hs:17:1-39: Non-exhaustive patterns in function allzero
+
+*Answers_2> :load answers_2.hs
+[1 of 1] Compiling Answers_2        ( answers_2.hs, interpreted )
+Ok, modules loaded: Answers_2.
+*Answers_2> allzero [0,0,0,0]
+True
+*Answers_2> allzero [1,2,3,4,0]
+False
+*Answers_2> somezero [1,2,3,4]
+True
+*Answers_2> somezero [1,2,3,4, 0]
+True
+*Answers_2> :load answers_2.hs
+
+answers_2.hs:3:18:
+    Could not find module ‘Foldable’
+    Use -v to see a list of the files searched for.
+Failed, modules loaded: none.
+Prelude> :load answers_2.hs
+[1 of 1] Compiling Answers_2        ( answers_2.hs, interpreted )
+
+answers_2.hs:25:17:
+    Couldn't match expected type ‘Bool -> Bool’ with actual type ‘Bool’
+    The operator ‘and’ takes two arguments,
+    but its type ‘[Bool] -> Bool’ has only one
+    In the expression: (x == v) `and` alli v xs
+    In an equation for ‘alli’:
+        alli v (x : xs) = (x == v) `and` alli v xs
+
+answers_2.hs:25:18:
+    Couldn't match expected type ‘[Bool]’ with actual type ‘Bool’
+    In the first argument of ‘and’, namely ‘(x == v)’
+    In the expression: (x == v) `and` alli v xs
+    In an equation for ‘alli’:
+        alli v (x : xs) = (x == v) `and` alli v xs
+Failed, modules loaded: none.
+Prelude> :load answers_2.hs
+[1 of 1] Compiling Answers_2        ( answers_2.hs, interpreted )
+
+answers_2.hs:25:17:
+    Couldn't match expected type ‘Bool -> Bool’ with actual type ‘Bool’
+    The operator ‘and’ takes two arguments,
+    but its type ‘[Bool] -> Bool’ has only one
+    In the expression: (x == v) `and` (alli v xs)
+    In an equation for ‘alli’:
+        alli v (x : xs) = (x == v) `and` (alli v xs)
+
+answers_2.hs:25:18:
+    Couldn't match expected type ‘[Bool]’ with actual type ‘Bool’
+    In the first argument of ‘and’, namely ‘(x == v)’
+    In the expression: (x == v) `and` (alli v xs)
+    In an equation for ‘alli’:
+        alli v (x : xs) = (x == v) `and` (alli v xs)
+Failed, modules loaded: none.
+Prelude> :load answers_2.hs
+[1 of 1] Compiling Answers_2        ( answers_2.hs, interpreted )
+Ok, modules loaded: Answers_2.
+*Answers_2> alli 2 [1,2,3]
+False
+*Answers_2> alli 2 [2,2,2]
+True
+*Answers_2> :load answers_2.hs
+[1 of 1] Compiling Answers_2        ( answers_2.hs, interpreted )
+Ok, modules loaded: Answers_2.
+*Answers_2> allv 'a' ['a','a']
+True
+*Answers_2> allv 'a' ['a','b']
+False
+*Answers_2> :load answers_2.hs
+[1 of 1] Compiling Answers_2        ( answers_2.hs, interpreted )
+
+answers_2.hs:38:22:
+    Couldn't match expected type ‘Int’ with actual type ‘s0 -> s0’
+    In the second argument of ‘(!!)’, namely ‘(div $ length str 2)’
+    In the expression: str !! (div $ length str 2)
+    In an equation for ‘middle’:
+        middle str = str !! (div $ length str 2)
+
+answers_2.hs:38:28:
+    Couldn't match expected type ‘a0 -> s0’ with actual type ‘Int’
+    The function ‘length’ is applied to two arguments,
+    but its type ‘[Char] -> Int’ has only one
+    In the second argument of ‘($)’, namely ‘length str 2’
+    In the second argument of ‘(!!)’, namely ‘(div $ length str 2)’
+Failed, modules loaded: none.
+Prelude> :load answers_2.hs
+[1 of 1] Compiling Answers_2        ( answers_2.hs, interpreted )
+Ok, modules loaded: Answers_2.
+*Answers_2> middle "abc"
+'b'
+*Answers_2> middle "abcd"
+'c'
+*Answers_2> :load answers_2.hs
+[1 of 1] Compiling Answers_2        ( answers_2.hs, interpreted )
+Ok, modules loaded: Answers_2.
+*Answers_2> repeatstring "abc"
+"abc abc"
+*Answers_2> :load Solution_2_4.hs
+[1 of 1] Compiling Solution_2_4     ( Solution_2_4.hs, interpreted )
+Ok, modules loaded: Solution_2_4.
+*Solution_2_4> :load Test_2_4.hs
+[1 of 2] Compiling Solution_2_4     ( Solution_2_4.hs, interpreted )
+[2 of 2] Compiling Test_2_4         ( Test_2_4.hs, interpreted )
+Ok, modules loaded: Solution_2_4, Test_2_4.
+*Test_2_4> test_zerofy
+Loading package transformers-0.3.0.0 ... linking ... done.
+Loading package pretty-1.1.1.1 ... linking ... done.
+Loading package array-0.5.0.0 ... linking ... done.
+Loading package deepseq-1.3.0.2 ... linking ... done.
+Loading package old-locale-1.0.0.6 ... linking ... done.
+Loading package time-1.4.2 ... linking ... done.
+Loading package containers-0.5.5.1 ... linking ... done.
+Loading package random-1.1 ... linking ... done.
+Loading package template-haskell ... linking ... done.
+Loading package primitive-0.6 ... linking ... done.
+Loading package tf-random-0.5 ... linking ... done.
+Loading package QuickCheck-2.8.1 ... linking ... done.
++++ OK, passed 100 tests.
+*Test_2_4> 
+*Test_2_4> 
+*Test_2_4> :load Solution_2_4.hs
+[1 of 1] Compiling Solution_2_4     ( Solution_2_4.hs, interpreted )
+
+Solution_2_4.hs:9:27:
+    No instance for (Num [Char]) arising from a use of ‘-’
+    In the second argument of ‘(:)’, namely ‘(copies c n - 1)’
+    In the expression: c : (copies c n - 1)
+    In an equation for ‘copies’: copies c n = c : (copies c n - 1)
+Failed, modules loaded: none.
+Prelude> :load Solution_2_4.hs
+[1 of 1] Compiling Solution_2_4     ( Solution_2_4.hs, interpreted )
+Ok, modules loaded: Solution_2_4.
+*Solution_2_4> copies 'a' 10
+"aaaaaaaaaa"
+*Solution_2_4> :load Test_2_4.hs
+[1 of 2] Compiling Solution_2_4     ( Solution_2_4.hs, interpreted )
+[2 of 2] Compiling Test_2_4         ( Test_2_4.hs, interpreted )
+Ok, modules loaded: Solution_2_4, Test_2_4.
+*Test_2_4> test_copies
+(2 tests)
+^G^?^?^C*** Failed! Exception: 'user interrupt' (after 3 tests): 
+-2
+*Test_2_4> :load Solution_2_4.hs
+[1 of 1] Compiling Solution_2_4     ( Solution_2_4.hs, interpreted )
+Ok, modules loaded: Solution_2_4.
+*Solution_2_4> :load Solution_2_4.hs
+[1 of 1] Compiling Solution_2_4     ( Solution_2_4.hs, interpreted )
+Ok, modules loaded: Solution_2_4.
+*Solution_2_4> stutter "abc"
+"aabbcc*** Exception: Solution_2_4.hs:13:1-33: Non-exhaustive patterns in function stutter
+
+*Solution_2_4> :load Solution_2_4.hs
+[1 of 1] Compiling Solution_2_4     ( Solution_2_4.hs, interpreted )
+Ok, modules loaded: Solution_2_4.
+*Solution_2_4> stutter "abc"
+"aabbcc"
+*Solution_2_4> :load Solution_2_4.hs
+[1 of 1] Compiling Solution_2_4     ( Solution_2_4.hs, interpreted )
+
+Solution_2_4.hs:16:11:
+    Expecting one more argument to ‘Num’
+    Expected kind ‘*’, but ‘Num’ has kind ‘* -> Constraint’
+    In the type signature for ‘mysum’: mysum :: [Num] -> Num
+Failed, modules loaded: none.
+Prelude> :load Solution_2_4.hs
+[1 of 1] Compiling Solution_2_4     ( Solution_2_4.hs, interpreted )
+Ok, modules loaded: Solution_2_4.
+*Solution_2_4> :load Solution_2_4.hs
+[1 of 1] Compiling Solution_2_4     ( Solution_2_4.hs, interpreted )
+Ok, modules loaded: Solution_2_4.
+*Solution_2_4> mysum [1,2,3]
+6
+*Solution_2_4> mysum []
+0
+*Solution_2_4> mysum [1.33, 2.33]
+3.66
+*Solution_2_4> :load Solution_2_4.hs
+[1 of 1] Compiling Solution_2_4     ( Solution_2_4.hs, interpreted )
+
+Solution_2_4.hs:25:10:
+    Couldn't match type ‘[[Int]] -> [Int]’ with ‘Int’
+    Expected type: [Int] -> Int
+      Actual type: [Int] -> [[Int]] -> [Int]
+    Probable cause: ‘foldr’ is applied to too few arguments
+    In the expression: foldr (+)
+    In an equation for ‘mysum'’: mysum' = foldr (+)
+
+Solution_2_4.hs:26:14:
+    Couldn't match type ‘[[Int]] -> [Int]’ with ‘Int’
+    Expected type: [Int] -> Int
+      Actual type: [Int] -> [[Int]] -> [Int]
+    Probable cause: ‘foldr’ is applied to too few arguments
+    In the expression: foldr (*)
+    In an equation for ‘myproduct'’: myproduct' = foldr (*)
+Failed, modules loaded: none.
+Prelude> :load Solution_2_4.hs
+[1 of 1] Compiling Solution_2_4     ( Solution_2_4.hs, interpreted )
+
+Solution_2_4.hs:25:13:
+    Couldn't match expected type ‘Int’
+                with actual type ‘[[Int]] -> [Int]’
+    Probable cause: ‘foldr’ is applied to too few arguments
+    In the expression: foldr (+) xs
+    In an equation for ‘mysum'’: mysum' xs = foldr (+) xs
+
+Solution_2_4.hs:26:17:
+    Couldn't match expected type ‘Int’
+                with actual type ‘[[Int]] -> [Int]’
+    Probable cause: ‘foldr’ is applied to too few arguments
+    In the expression: foldr (*) xs
+    In an equation for ‘myproduct'’: myproduct' xs = foldr (*) xs
+Failed, modules loaded: none.
+Prelude> :load Solution_2_4.hs
+[1 of 1] Compiling Solution_2_4     ( Solution_2_4.hs, interpreted )
+Ok, modules loaded: Solution_2_4.
+*Solution_2_4> mysum' [1,2,3]
+6
+*Solution_2_4> :load Solution_2_5.hs
+[1 of 1] Compiling Solution_2_5     ( Solution_2_5.hs, interpreted )
+
+Solution_2_5.hs:7:1:
+    Couldn't match expected type ‘t0 -> t1 -> t2’
+                with actual type ‘Bool’
+    The equation(s) for ‘validTimeOfDay’ have three arguments,
+    but its type ‘TimeOfDay -> Bool’ has only one
+
+Solution_2_5.hs:7:16:
+    Constructor ‘TimeOfDay’ should have 2 arguments, but has been given none
+    In the pattern: TimeOfDay
+    In an equation for ‘validTimeOfDay’:
+        validTimeOfDay TimeOfDay hrs mins
+          | hrs > 23 = False
+          | mins > 59 = False
+          | otherwise = True
+Failed, modules loaded: none.
+Prelude> :load Solution_2_5.hs
+[1 of 1] Compiling Solution_2_5     ( Solution_2_5.hs, interpreted )
+Ok, modules loaded: Solution_2_5.
+*Solution_2_5> :load Solution_2_5.hs
+[1 of 1] Compiling Solution_2_5     ( Solution_2_5.hs, interpreted )
+
+Solution_2_5.hs:34:23:
+    No instance for (Num IntExp) arising from the literal ‘0’
+    In the pattern: 0
+    In the pattern: Plus x 0
+    In an equation for ‘simpleIntExp1’: simpleIntExp1 (Plus x 0) = x
+Failed, modules loaded: none.
+Prelude> :load Solution_2_5.hs
+[1 of 1] Compiling Solution_2_5     ( Solution_2_5.hs, interpreted )
+Ok, modules loaded: Solution_2_5.
+*Solution_2_5> :load Solution_2_5.hs
+[1 of 1] Compiling Solution_2_5     ( Solution_2_5.hs, interpreted )
+
+Solution_2_5.hs:41:35:
+    Couldn't match expected type ‘Int’ with actual type ‘IntExp’
+    In the expression: a
+    In the first argument of ‘Const’, namely ‘(- a)’
+Failed, modules loaded: none.
+Prelude> :load Solution_2_5.hs
+[1 of 1] Compiling Solution_2_5     ( Solution_2_5.hs, interpreted )
+
+Solution_2_5.hs:41:39:
+    Couldn't match expected type ‘Int’ with actual type ‘IntExp’
+    In the second argument of ‘(*)’, namely ‘a’
+    In the expression: 1 * a
+Failed, modules loaded: none.
+Prelude> :load Solution_2_5.hs
+[1 of 1] Compiling Solution_2_5     ( Solution_2_5.hs, interpreted )
+Ok, modules loaded: Solution_2_5.
+*Solution_2_5> :load Solution_2_5.hs
+[1 of 1] Compiling Solution_2_5     ( Solution_2_5.hs, interpreted )
+
+Solution_2_5.hs:45:1:
+    Parse error: naked expression at top level
+    Perhaps you intended to use TemplateHaskell
+Failed, modules loaded: none.
+Prelude> :load Solution_2_5.hs
+[1 of 1] Compiling Solution_2_5     ( Solution_2_5.hs, interpreted )
+Ok, modules loaded: Solution_2_5.
+*Solution_2_5> simpleIntExp1 exp1
+x * 1 + 1 * y
+*Solution_2_5> :load Solution_2_5.hs
+[1 of 1] Compiling Solution_2_5     ( Solution_2_5.hs, interpreted )
+
+Solution_2_5.hs:35:36:
+    Not in scope: ‘simpledIntExp1’
+    Perhaps you meant ‘simpleIntExp1’ (line 34)
+
+Solution_2_5.hs:37:37:
+    Not in scope: ‘simpledIntExp1’
+    Perhaps you meant ‘simpleIntExp1’ (line 34)
+Failed, modules loaded: none.
+Prelude> :load Solution_2_5.hs
+[1 of 1] Compiling Solution_2_5     ( Solution_2_5.hs, interpreted )
+
+Solution_2_5.hs:41:27:
+    Couldn't match expected type ‘IntExp -> IntExp’
+                with actual type ‘IntExp’
+    The function ‘Minus’ is applied to two arguments,
+    but its type ‘IntExp -> IntExp’ has only one
+    In the expression: Minus simpleIntExp1 a
+    In an equation for ‘simpleIntExp1’:
+        simpleIntExp1 (Minus a) = Minus simpleIntExp1 a
+
+Solution_2_5.hs:41:33:
+    Couldn't match expected type ‘IntExp’
+                with actual type ‘IntExp -> IntExp’
+    Probable cause: ‘simpleIntExp1’ is applied to too few arguments
+    In the first argument of ‘Minus’, namely ‘simpleIntExp1’
+    In the expression: Minus simpleIntExp1 a
+Failed, modules loaded: none.
+Prelude> :load Solution_2_5.hs
+[1 of 1] Compiling Solution_2_5     ( Solution_2_5.hs, interpreted )
+Ok, modules loaded: Solution_2_5.
+*Solution_2_5> simpleIntExp1 exp1
+*** Exception: Solution_2_5.hs:(34,1)-(41,49): Non-exhaustive patterns in function simpleIntExp1
+
+*Solution_2_5> :load Solution_2_5.hs
+[1 of 1] Compiling Solution_2_5     ( Solution_2_5.hs, interpreted )
+Ok, modules loaded: Solution_2_5.
+*Solution_2_5> simpleIntExp1 exp1
+*** Exception: Solution_2_5.hs:(34,1)-(42,29): Non-exhaustive patterns in function simpleIntExp1
+
+*Solution_2_5> :load Solution_2_5.hs
+[1 of 1] Compiling Solution_2_5     ( Solution_2_5.hs, interpreted )
+Ok, modules loaded: Solution_2_5.
+*Solution_2_5> valIntExp (Plus (Const 4) (Minus (Const 3)))
+1
+*Solution_2_5> :load Solution_2_5.hs
+[1 of 1] Compiling Solution_2_5     ( Solution_2_5.hs, interpreted )
+Ok, modules loaded: Solution_2_5.
+*Solution_2_5> simpleIntExp1 exp1
+*** Exception: Solution_2_5.hs:(37,1)-(44,49): Non-exhaustive patterns in function simpleIntExp1
+
+*Solution_2_5> :load Solution_2_5.hs
+[1 of 1] Compiling Solution_2_5     ( Solution_2_5.hs, interpreted )
+Ok, modules loaded: Solution_2_5.
+*Solution_2_5> simpleIntExp1 exp1
+*** Exception: Solution_2_5.hs:(37,1)-(45,29): Non-exhaustive patterns in function simpleIntExp1
+
+*Solution_2_5> simpleIntExp1 exp1
+*** Exception: Solution_2_5.hs:(37,1)-(45,29): Non-exhaustive patterns in function simpleIntExp1
+
+*Solution_2_5> simpleIntExp1 exp1
+*** Exception: Solution_2_5.hs:(37,1)-(45,29): Non-exhaustive patterns in function simpleIntExp1
+
+*Solution_2_5> :load Solution_2_5.hs
+[1 of 1] Compiling Solution_2_5     ( Solution_2_5.hs, interpreted )
+Ok, modules loaded: Solution_2_5.
+*Solution_2_5> simpleIntExp1 exp1
+x + y
+*Solution_2_5> simpleIntExp1 exp2
+x + *** Exception: Solution_2_5.hs:(37,1)-(47,29): Non-exhaustive patterns in function simpleIntExp1
+
+*Solution_2_5> :load Solution_2_5.hs
+[1 of 1] Compiling Solution_2_5     ( Solution_2_5.hs, interpreted )
+Ok, modules loaded: Solution_2_5.
+*Solution_2_5> simpleIntExp1 exp2
+x + 0
+*Solution_2_5> :load Solution_2_5.hs
+[1 of 1] Compiling Solution_2_5     ( Solution_2_5.hs, interpreted )
+Ok, modules loaded: Solution_2_5.
+*Solution_2_5> simpleIntExp1 exp2
+x + 5 + 7
+*Solution_2_5> :load Solution_2_5.hs
+[1 of 1] Compiling Solution_2_5     ( Solution_2_5.hs, interpreted )
+Ok, modules loaded: Solution_2_5.
+*Solution_2_5> simpleIntExp1 exp2
+x + 12
+*Solution_2_5> 

@@ -1,0 +1,9 @@
+{-
+1.4: :load module loads a file of definitions
+     :reload reloads the current set of definitions
+     :quit quits the interpreter
+-}
+module solution2 where
+
+sum3 :: Int -> Int -> Int -> Int
+sum3 x y z = x + y + z

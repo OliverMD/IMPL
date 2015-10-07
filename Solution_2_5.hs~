@@ -1,0 +1,77 @@
+module Solution_2_5 where
+
+data Period = AM | PM deriving(Eq, Ord, Show)
+data TimeOfDay = TimeOfDay Int Int
+
+validTimeOfDay :: TimeOfDay -> Bool
+validTimeOfDay (TimeOfDay hrs mins)
+  | hrs > 23 = False
+  | mins > 59 = False
+  | otherwise = True
+
+tod2period :: TimeOfDay -> Period
+tod2period (TimeOfDay hrs mins)
+  | hrs < 12 = AM
+  | otherwise = PM
+
+data IntExp = Const Int | Var String
+                        | Plus IntExp IntExp
+                        | Times IntExp IntExp
+                        | Minus IntExp
+                          deriving Eq
+
+instance Show IntExp where
+  show (Const n) = show n
+  show (Var s) = s
+  show (Plus a b) = show a ++ " + " ++ show b
+  show (Times a b) = show a ++ " * " ++ show b
+  show (Minus a) = "-" ++ show a
+
+valIntExp :: IntExp -> Int
+valIntExp (Const x) = x
+valIntExp (Plus a b) = (valIntExp a) + (valIntExp b)
+valIntExp (Times a b) = (valIntExp a) * (valIntExp b)
+valIntExp (Minus a) = -(valIntExp a)
+
+simpleIntExp1 :: IntExp -> IntExp
+simpleIntExp1 (Plus x (Const 0)) =  simpleIntExp1 x
+simpleIntExp1 (Plus (Const 0) x) =  simpleIntExp1 x
+simpleIntExp1 (Plus (Const x) (Const y)) = Const (x + y)
+simpleIntExp1 (Plus x y) = Plus (simpleIntExp1 x) (simpleIntExp1 y)
+simpleIntExp1 (Times x (Const 1)) = simpleIntExp1 x
+simpleIntExp1 (Times (Const 1) x) = simpleIntExp1 x
+simpleIntExp1 (Times _ (Const 0)) = (Const 0)
+simpleIntExp1 (Times (Const 0) _) = (Const 0)
+simpleIntExp1 (Times (Const x) (Const y)) = Const (x * y)
+simpleIntExp1 (Times x y) = Times (simpleIntExp1 x) (simpleIntExp1 y)
+simpleIntExp1 (Minus(Minus a)) = simpleIntExp1 a
+simpleIntExp1 (Minus a) = Minus (simpleIntExp1 a)
+simpleIntExp1 (Minus (Const a)) = Const (-1 * a)
+simpleIntExp1 (Var s) = Var s
+simpleIntExp1 (Const x) = Const xd
+
+exp1, exp2 ::  IntExp
+exp1 = Times (Const 1) (Plus (Times (Var "x")  (Const 1))  (Times (Const 1) (Var "y" )))
+exp2 = Plus (Var "x")  (Plus (Const 5) (Const 7))
+
+
+map', map'' :: (a->b) -> [a] -> [b]
+map' _ [] = []
+map' f (x:xs) = f x : map' f xs
+
+filter', filter'' :: (a->Bool) -> [a] -> [a]
+filter' _ [] = []
+filter' p (x:xs) | p x = x : filter' p xs
+                 | otherwise = filter' p xs
+
+
+map'' _ [] = []
+map'' f (x:xs) = nf where
+  nf = f x : map'' f xs
+
+filter'' _ [] = []
+filter'' p (x:xs) | p x = a
+                  |otherwise = b
+                  where
+                  a = p x = x : filter'' p xs
+                  b = filter'' p xs

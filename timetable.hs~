@@ -1,0 +1,9 @@
+module Timetable where
+
+data Activity = Lecture | Seminar | Laboratory | Assessment deriving (Show, Eq)
+data Period = AM | PM deriving (Show, Eq, Ord)
+day :: [Period]
+day = [AM, PM]
+data Day = Sunday | Monday | Tuesday | Wednesday | Thursday | Friday | Saturday deriving (Show, Eq)
+week :: [Day]
+week = [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
