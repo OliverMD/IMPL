@@ -40,11 +40,11 @@ instance Timetable TRel where
   
   addActivity (s, a) (TRel t) = TRel ((s, a):t)
   
-  clearSlot s (TRel (s', a):xs) | s' == s = clearSlot s (TRel xs)
-                                | otherwise = addActivty (s', a) (clearSlot s (TRel xs))
+  clearSlot s (TRel ((s', a):xs)) | s' == s = clearSlot s (TRel xs)
+                                | otherwise = addActivity (s', a) (clearSlot s (TRel xs))
                                               
-  activity s (TRel (s', a):[]) | s' == s = [a]
-                               | otherwise = []
-                                             
-  activity s (TRel (s', a):xs) | s' == s = a:(activity s (TRel xs))
-                               | otherwise = activity s (TRel xs)
+  activity (TRel [(s',a')]) s | s == s' = [a']
+                              | otherwise = []
+  activity (TRel ((s',a'):xs)) s | s == s' = a':(activity (TRel xs) s)
+                               | otherwise = activity (TRel xs) s
+newtype TFun = TFun {Tfun :: Slot -> [Activity]}

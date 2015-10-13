@@ -1,0 +1,7 @@
+EAdd. IntExp ::= IntExp "+" IntExp1 ;
+EMul. IntExp1 ::= IntExp1 "*" IntExp2 ;
+ENeg. IntExp2 ::= "-" IntExp3 ;
+EInt. IntExp3 ::= Integer ;
+EVar. IntExp3 ::= Ident ;
+
+coercions IntExp 3 ;

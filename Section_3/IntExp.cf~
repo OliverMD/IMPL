@@ -1,0 +1,3 @@
+EAdd. IntExp ::= IntExp "+" IntExp1
+EMul. IntExp1 ::= IntExp1 "*" IntExp2
+ENeg. IntExp2 ::= "-" IntExp2
