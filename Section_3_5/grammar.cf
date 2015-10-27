@@ -1,0 +1,11 @@
+AAdd. A ::= A "+" A   ;
+AMul. A ::= A "*" A   ;
+ANum. A ::= Integer   ;
+ABrk. A ::= "(" A ")" ;
+
+BAdd. B ::= B "+" B1  ;
+B01. B ::= B1         ;
+BMul. B1 ::= B1 "*" B2;
+B12. B1 ::= B2        ;
+BNum. B2 ::= Integer  ;
+BBrk. B2 ::= "(" B ")";

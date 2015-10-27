@@ -1,0 +1,3 @@
+module LexerCombinator where
+
+type RegExp a :: [a] -> (Maybe [a], [a])

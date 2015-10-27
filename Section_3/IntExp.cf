@@ -4,4 +4,9 @@ ENeg. IntExp2 ::= "-" IntExp3 ;
 EInt. IntExp3 ::= Integer ;
 EVar. IntExp3 ::= Ident ;
 
+token CIdent (upper (letter)*) ;
+token TeX ('\\' letter letter*);
+token Word ('%' (letter letter*|digit digit*) '%');
+token Subscript ('_'(digit|letter| ('{' (digit|letter)+ '}')));
+
 coercions IntExp 3 ;

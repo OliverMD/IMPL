@@ -1,0 +1,11 @@
+rules BExp ::= Ident | "TRUE" | "FALSE" |  BExp "<" BExp | BExp "=" BExp;
+BAnd. BExp1 ::= BExp "AND" BExp ;
+BNot. BExp2 ::= "NOT" BExp1 ;
+coercions BExp 3 ;
+rules IntExp ::= Ident | Integer;
+IAdd. IntExp1 ::= IntExp "+" IntExp;
+IMul. IntExp2 ::= IntExp1 "*" IntExp1;
+INeg. IntExp3 ::= IntExp2 "-" IntExp2;
+coercions IntExp 4;
+rules Stmt ::= "SKIP" | Ident ":=" BExp | Ident ":=" IntExp | "PRINT" IntExp | Stmt ";" Stmt | "IF" BExp "THEN" Stmt "ELSE" Stmt | "WHILE" BExp Stmt | "(" Stmt ")" ;
+

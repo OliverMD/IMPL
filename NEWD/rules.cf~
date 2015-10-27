@@ -1,0 +1,27 @@
+position token PAss {":="} ;
+position token PImp {"=>"} ;
+position token PAdd ’+’ ; position token PMul ’*’ ; position token PNeg ’−’ ;
+position token PRel ’=’ | ’<’ ; −− relations with same binding power
+position token PFLS {"FALSE"} ; −− must precede PId
+position token PId ( letter ( letter | digit |’ _ ’|’\’’)*) ;
+rules Stm ::= "skip" −− null statement
+      | [PId] PAss [Exp] −− Assignment
+      | " if " [GCm] "fi" −− choice
+      | "do" [GCm] "od" −− iteration
+      | [Stm] −− sequence
+      | " { " PId ": " Type "@" Stm "}" −− block
+      | " print " Exp ; −− print
+separator nonempty Stm ";" ;
+GC. GCm ::= Exp "−>" Stm ; −− type rules enforce Exp to have type Bool
+separator nonempty GCm "[]" ;
+separator nonempty PId "," ;
+internal Ass. Stm ::= String Exp ;
+BImp. Exp ::= Exp1 PImp Exp ;
+BRel. Exp1 ::= Exp2 PRel Exp2 ; −− relations
+IAdd. Exp2 ::= Exp3 PAdd Exp2 ;
+IMul. Exp3 ::= Exp4 PMul Exp3 ;
+INeg. Exp4 ::= PNeg Exp4 ;
+rules Exp5 ::= Integer | PFLS | PId ; −− constants & variables
+coercions Exp 5 ;
+separator nonempty Exp "," ;
+rules Type ::= "Bool" | " Int " ;
