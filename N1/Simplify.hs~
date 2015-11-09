@@ -1,0 +1,5 @@
+module Simplify where
+import AbsRules
+
+simplify :: Stmt -> Stmt
+simplify (STerm (SSkip) p) = p
