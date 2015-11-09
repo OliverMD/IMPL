@@ -1,4 +1,4 @@
-module TypN1 where
+module TypeRules where
 
 import AbsRules
 import ErrM
@@ -44,22 +44,22 @@ duplicateTargets p = errMs p "duplicate variable names"
 
 
 validIntExp :: Env -> Type -> IntExp -> ErrorMessage
-validIntExp env typ (IntExpIdent x) | envRet == Just typ = noError
-                                    | envRet == Nothing = nodecl x
-                                    | otherwise = badcontext typ x
-                                                  where envret = typeOfVar env x
+validIntExp env typ (IntExpPIdent (PIdent all@(_,x))) | envRet == Just typ = noError
+                                    | envRet == Nothing = nodecl all
+                                    | otherwise = badcontext typ all
+                                                  where envRet = typeOfVar env x
 validIntExp env typ (IntExpInteger x) = noError
-validIntExp env typ (IAdd a b) | typ == TInt = (validIntExp TInt a) `jErr` (validIntExp TInt b)
+validIntExp env typ (IAdd a b) | typ == TInt = (validIntExp env TInt a) `jErr` (validIntExp env TInt b)
                                | otherwise = errMs (1,1) "IAdd Error"
-validIntExp env typ (IMul a b) | typ == TInt = (validIntExp TInt a) `jErr` (validIntExp TInt b)
+validIntExp env typ (IMul a b) | typ == TInt = (validIntExp env TInt a) `jErr` (validIntExp env TInt b)
                                | otherwise = errMs (2,2) "IMul Error"
-validIntExp env typ (INeg a b) | typ == TInt = (validIntExp TInt a) `jErr` (validIntExp TInt b)
+validIntExp env typ (INeg a b) | typ == TInt = (validIntExp env TInt a) `jErr` (validIntExp env TInt b)
                                | otherwise =  errMs (3,3) "INeg Error"
 
 validBoolExp :: Env -> BExp -> ErrorMessage
-validBoolExp env (BExpIdent x) | (typeOfVar env x) == Just TBool = noError
-                               | (typeOfVar env x) == Nothing = nodecl x
-                               | otherwise = badcontext TBool x
+validBoolExp env (BExpPIdent (PIdent all@(_,x))) | (typeOfVar env x) == Just TBool = noError
+                               | (typeOfVar env x) == Nothing = nodecl all
+                               | otherwise = badcontext TBool all
 validBoolExp env (BExp_TRUE) = noError
 validBoolExp env (BExp_FALSE) = noError
 validBoolExp env (BExp1 a b) = (validBoolExp env a) `jErr` (validBoolExp env b)
@@ -69,4 +69,17 @@ validBoolExp env (BNot a) = validBoolExp env a
 
 validStm :: Env -> Stmt -> ErrorMessage
 validStm env (SSkip) = noError
-validStm env (SBass x bexp) 
+validStm env (SBAss x bexp) = validBoolExp env bexp
+validStm env (SIAss x iexp) = validIntExp env TInt  iexp
+validStm env (SPnt iexp) = validIntExp env TInt iexp
+validStm env (STerm s1 s2) = (validStm env s1) `jErr` (validStm env s2)
+validStm env (SIF bexp s1 s2) = (validBoolExp env bexp) `jErr` (validStm env s1) `jErr` (validStm env s2)
+validStm env (SWhile bexp s) = (validBoolExp env bexp) `jErr` (validStm env s)
+validStm env (SParen s) = validStm env s
+validStm env (SBlock (PIdent (_, x)) typ s) = (validStm (addToEnv (typ, x) env) s)
+
+
+txStm :: Stmt -> Err Stmt
+txStm s | typeErrors == noError = Ok s
+        | otherwise = Bad (reportErr typeErrors)
+                      where typeErrors = validStm emptyEnv s

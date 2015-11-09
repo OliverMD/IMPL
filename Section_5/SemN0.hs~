@@ -1,0 +1,31 @@
+module SemN0 where
+import AbsRules
+
+-- simplistic implementation of states
+data Value = Null | IsBool Bool | IsInt Integer deriving (Eq, Show)
+type State = [(String, Value)]
+emptyState :: State -- the empty state
+emptyState = []
+addToState :: String -> State -> State -- put new declaration in state
+addToState v s = (v, Null):s
+fetch :: State -> String -> Value -- get value associated with a name
+fetch s name = head [val | (nm, val) <- s, nm==name]
+update :: (String, Value) -> State -> State -- update value associated with a name
+-- update (n, v) [] = [(n,v)]
+update p@(n, v) (q@(m,_):ss) | n==m      = p:ss
+                             | otherwise = q:update p ss
+
+evaluateIntExp :: State -> IntExp -> Value
+evaluateIntExp s (IntExpIdent (Ident id)) | Null <- val = error ("Unset variable: " ++ show id)
+                                    | otherwise = val
+                                                  where val = fetch s id
+evaluateIntExp s (IntExpInteger x) = IsInt x
+evaluateIntExp s (IAdd x y) = IsInt (x` + y`)
+                              where (IsInt x`) = evaluateIntExp s x
+                                    (IsInt y`) = evaluateIntExp s y
+evaluateIntExp s (IMul x y) = IsInt (x` * y`)
+                              where (IsInt x`) = evaluateIntExp s x
+                                    (IsInt y`) = evaluateIntExp s y
+evaluateIntExp s (INeg x y) = IsInt (x` - y`)
+                              where (IsInt x`) = evaluateIntExp s x
+                                    (IsInt y`) = evaluateIntExp s y

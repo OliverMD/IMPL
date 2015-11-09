@@ -1,0 +1,23 @@
+−− grammar for M0
+−− Jeremy Jacob, August 2015
+−− A line is an instruction terminated by a newline
+−− and preceded by a possibly empty collection of labels
+Cmd. Line ::= [String] ": " Instruction ;
+separator String ", " ;
+terminator Line "\n" ;
+−− Instructions may refer to Integers and Register names
+−− Register names are just strings
+Nop. Instruction ::= "nop" ; −− no op
+Hlt . Instruction ::= " hlt " ; −− halt machine
+Lim. Instruction ::= "lim" String Integer ; −− load immediate ra := n
+Mov. Instruction ::= "mov" String String ; −− move ra := rb
+Add. Instruction ::= "add" String String String ; −− ra := rb + rc
+Mul. Instruction ::= "mul" String String String ; −− ra := rb *
+rc
+Neg. Instruction ::= "neg" String String ; −− ra := −rb
+Prn. Instruction ::= "prn" String ; −− print ra
+Jmp. Instruction ::= "jmp" String ; −− jump to label
+Beq. Instruction ::= "beq" String String String ; −− if ra = rb then jmp l
+Blt . Instruction ::= " blt " String String String ; −− if ra < rb then jmp l
+Lor. Instruction ::= " lor " String String String ; −− logical disjunction
+−− That code is a list of lines will be dealt with in the using programs
