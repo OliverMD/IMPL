@@ -25,9 +25,8 @@ data Instruction
     | Lor String String String
     | Bne String String String
     | Bge String String String
-    | AddI String String Integer
-    | MulI String String Integer
+    | AddI String Integer Integer
+    | MulI String Integer Integer
     | NegI String Integer
-    | Beqi String Integer String
   deriving (Eq, Ord, Show, Read)
 
