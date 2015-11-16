@@ -23,20 +23,22 @@ import ErrM
   'add' { PT _ (TS _ 4) }
   'addi' { PT _ (TS _ 5) }
   'beq' { PT _ (TS _ 6) }
-  'bge' { PT _ (TS _ 7) }
-  'blt' { PT _ (TS _ 8) }
-  'bne' { PT _ (TS _ 9) }
-  'hlt' { PT _ (TS _ 10) }
-  'jmp' { PT _ (TS _ 11) }
-  'lim' { PT _ (TS _ 12) }
-  'lor' { PT _ (TS _ 13) }
-  'mov' { PT _ (TS _ 14) }
-  'mul' { PT _ (TS _ 15) }
-  'muli' { PT _ (TS _ 16) }
-  'neg' { PT _ (TS _ 17) }
-  'negi' { PT _ (TS _ 18) }
-  'nop' { PT _ (TS _ 19) }
-  'prn' { PT _ (TS _ 20) }
+  'beqi' { PT _ (TS _ 7) }
+  'bge' { PT _ (TS _ 8) }
+  'blt' { PT _ (TS _ 9) }
+  'blti' { PT _ (TS _ 10) }
+  'bne' { PT _ (TS _ 11) }
+  'hlt' { PT _ (TS _ 12) }
+  'jmp' { PT _ (TS _ 13) }
+  'lim' { PT _ (TS _ 14) }
+  'lor' { PT _ (TS _ 15) }
+  'mov' { PT _ (TS _ 16) }
+  'mul' { PT _ (TS _ 17) }
+  'muli' { PT _ (TS _ 18) }
+  'neg' { PT _ (TS _ 19) }
+  'negi' { PT _ (TS _ 20) }
+  'nop' { PT _ (TS _ 21) }
+  'prn' { PT _ (TS _ 22) }
 
 L_quoted { PT _ (TL $$) }
 L_integ  { PT _ (TI $$) }
@@ -72,9 +74,11 @@ Instruction : 'nop' { AbsM.Nop }
             | 'lor' String String String { AbsM.Lor $2 $3 $4 }
             | 'bne' String String String { AbsM.Bne $2 $3 $4 }
             | 'bge' String String String { AbsM.Bge $2 $3 $4 }
-            | 'addi' String Integer Integer { AbsM.AddI $2 $3 $4 }
-            | 'muli' String Integer Integer { AbsM.MulI $2 $3 $4 }
+            | 'addi' String String Integer { AbsM.AddI $2 $3 $4 }
+            | 'muli' String String Integer { AbsM.MulI $2 $3 $4 }
             | 'negi' String Integer { AbsM.NegI $2 $3 }
+            | 'beqi' String Integer String { AbsM.BeqI $2 $3 $4 }
+            | 'blti' String Integer String { AbsM.BltI $2 $3 $4 }
 {
 
 returnM :: a -> Err a

@@ -101,8 +101,10 @@ instance Print Instruction where
     Lor str1 str2 str3 -> prPrec i 0 (concatD [doc (showString "lor"), prt 0 str1, prt 0 str2, prt 0 str3])
     Bne str1 str2 str3 -> prPrec i 0 (concatD [doc (showString "bne"), prt 0 str1, prt 0 str2, prt 0 str3])
     Bge str1 str2 str3 -> prPrec i 0 (concatD [doc (showString "bge"), prt 0 str1, prt 0 str2, prt 0 str3])
-    AddI str n1 n2 -> prPrec i 0 (concatD [doc (showString "addi"), prt 0 str, prt 0 n1, prt 0 n2])
-    MulI str n1 n2 -> prPrec i 0 (concatD [doc (showString "muli"), prt 0 str, prt 0 n1, prt 0 n2])
+    AddI str1 str2 n -> prPrec i 0 (concatD [doc (showString "addi"), prt 0 str1, prt 0 str2, prt 0 n])
+    MulI str1 str2 n -> prPrec i 0 (concatD [doc (showString "muli"), prt 0 str1, prt 0 str2, prt 0 n])
     NegI str n -> prPrec i 0 (concatD [doc (showString "negi"), prt 0 str, prt 0 n])
+    BeqI str1 n str2 -> prPrec i 0 (concatD [doc (showString "beqi"), prt 0 str1, prt 0 n, prt 0 str2])
+    BltI str1 n str2 -> prPrec i 0 (concatD [doc (showString "blti"), prt 0 str1, prt 0 n, prt 0 str2])
 
 

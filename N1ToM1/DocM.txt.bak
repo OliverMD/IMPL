@@ -26,14 +26,15 @@ Integer literals //Integer// are nonempty sequences of digits.
 The set of reserved words is the set of terminals appearing in the grammar. Those reserved words that consist of non-letter characters are called symbols, and they are treated in a different way from those that are similar to identifiers. The lexer follows rules familiar from languages like Haskell, C, and Java, including longest match and spacing conventions.
 
 The reserved words used in M are the following:
-  | ``add`` | ``beq`` | ``jmp`` | ``lim``
-  | ``mov`` | ``mul`` | ``neg`` | ``nop``
-  | ``prn`` |  |  | 
+  | ``add`` | ``addi`` | ``beq`` | ``beqi``
+  | ``bge`` | ``blt`` | ``bne`` | ``hlt``
+  | ``jmp`` | ``lim`` | ``lor`` | ``mov``
+  | ``mul`` | ``muli`` | ``neg`` | ``negi``
+  | ``nop`` | ``prn`` |  | 
 
 The symbols used in M are the following:
   | :  | ,  | 
- |  hlt 
-  |  blt  |  lor  |  | 
+ | 
 
 ===Comments===
 There are no single-line comments in the grammar.There are no multiple-line comments in the grammar.
@@ -52,7 +53,7 @@ All other symbols are terminals.
   |  |  **|**  | //Line// ``
 `` //[Line]// 
   | //Instruction// | -> | ``nop`` 
-  |  |  **|**  | `` hlt `` 
+  |  |  **|**  | ``hlt`` 
   |  |  **|**  | ``lim`` //String// //Integer// 
   |  |  **|**  | ``mov`` //String// //String// 
   |  |  **|**  | ``add`` //String// //String// //String// 
@@ -61,7 +62,13 @@ All other symbols are terminals.
   |  |  **|**  | ``prn`` //String// 
   |  |  **|**  | ``jmp`` //String// 
   |  |  **|**  | ``beq`` //String// //String// //String// 
-  |  |  **|**  | `` blt `` //String// //String// //String// 
-  |  |  **|**  | `` lor `` //String// //String// //String// 
+  |  |  **|**  | ``blt`` //String// //String// //String// 
+  |  |  **|**  | ``lor`` //String// //String// //String// 
+  |  |  **|**  | ``bne`` //String// //String// //String// 
+  |  |  **|**  | ``bge`` //String// //String// //String// 
+  |  |  **|**  | ``addi`` //String// //String// //Integer// 
+  |  |  **|**  | ``muli`` //String// //String// //Integer// 
+  |  |  **|**  | ``negi`` //String// //Integer// 
+  |  |  **|**  | ``beqi`` //String// //Integer// //String// 
 
 

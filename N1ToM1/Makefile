@@ -1,12 +1,12 @@
 all:
-	happy -gca ParRules.y
-	alex -g LexRules.x
-	ghc --make TestRules.hs -o TestRules
+	happy -gca ParM.y
+	alex -g LexM.x
+	ghc --make TestM.hs -o TestM
 
 clean:
 	-rm -f *.log *.aux *.hi *.o *.dvi
 
 distclean: clean
-	-rm -f DocRules.* LexRules.* ParRules.* LayoutRules.* SkelRules.* PrintRules.* TestRules.* AbsRules.* TestRules ErrM.* SharedString.* ComposOp.* rules.dtd XMLRules.* Makefile*
+	-rm -f DocM.* LexM.* ParM.* LayoutM.* SkelM.* PrintM.* TestM.* AbsM.* TestM ErrM.* SharedString.* ComposOp.* M.dtd XMLM.* Makefile*
 	
 

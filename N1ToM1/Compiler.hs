@@ -3,8 +3,9 @@ module Compiler where
 import AbsRules
 import AbsM
 import ErrM
-import Simplifier
 import Fresh
+import ParRules
+import SemM
 
 type Code = [Line]
 
@@ -15,6 +16,29 @@ comBExp :: BExp -> (String, Code)
 jumpT :: BExp -> String -> Code
 jumpF :: BExp -> String -> Code
 
+compile s = comStm s ++ [Cmd [] Hlt]
+
+comBExp (BExpPIdent (PIdent (_, v))) = (res, c)
+                                       where res = fresh ()
+                                             c = [Cmd [] (Mov res v)]
+comBExp (BExp_TRUE) = (res ,c)
+                      where res = fresh ()
+                            c = [Cmd [] (Lim res 1)]
+comBExp (BExp_FALSE) = (res, c)
+                       where res = fresh ()
+                             c = [Cmd [] (Lim res 0)]
+comBExp (BExp1 a b) = (res, c)
+                      where res = fresh ()
+                            c = d ++ e ++ [Cmd [] (Lor res v u)]
+                             where (v, d) = comBExp a
+                                   (u, e) = comBExp b
+comBExp (BExp2 a b) = (res, c)          
+                      where res = fresh ()
+                            c = d ++ e ++ [Cmd [] (Mul res u v)]
+                             where (u, d) = comBExp a
+                                   (v, e) = comBExp b
+comBExp (BAnd a b) = comBExp (BExp2 a b)
+comBExp (BNot a) = comBExp a
 comIntExp (IntExpPIdent (PIdent (_, v))) = (res, c)
                where res = fresh ()
                      c = [Cmd [] (Mov res v)]
@@ -43,7 +67,7 @@ comIntExp (INeg a b) = (res, c)
                                  ++ e
                                  ++ [Cmd [] (Add res v u)]
                                  where (v, d) = comIntExp a
-                                       (u, e) = comIntExp (IMul b (IntExpInteger -1))
+                                       (u, e) = comIntExp (IMul b (IntExpInteger (-1)))
 
 
 comStm (SWhile g p) = [Cmd [top] Nop]
@@ -81,18 +105,12 @@ comStm (SPnt exp) = c
                     ++ [Cmd [] (Prn v)]
                     where (v, c) = comIntExp exp
 
-comStm (SIAss (PIdent (_,v)) (IAdd a b)) = c
-                                           ++ d
-                                           ++ [Cmd [] (Add v t u)]
-                                           where
-                                             (t, c) = comIntExp a
-                                             (u, d) = comIntExp b
 comStm (SIAss (PIdent (_,v)) (IAdd a (IntExpInteger n))) = c
                                                            ++ [Cmd [] (AddI v u n)]
                                                            where (u, c) = comIntExp a
 
 comStm (SIAss (PIdent (_,v)) (IAdd (IntExpInteger n) a)) = c
-                                                           ++ [Cmd [] (AddI vu n)]
+                                                           ++ [Cmd [] (AddI v u n)]
                                                            where (u, c) = comIntExp a
 
 comStm (SIAss (PIdent (_,v)) (IMul a (IntExpInteger n))) = c
@@ -100,12 +118,18 @@ comStm (SIAss (PIdent (_,v)) (IMul a (IntExpInteger n))) = c
                                                            where (u, c) = comIntExp a
 
 comStm (SIAss (PIdent (_,v)) (IMul (IntExpInteger n) a)) = c
-                                                           ++ [Cmd [] (MulI vu n)]
+                                                           ++ [Cmd [] (MulI v u n)]
                                                            where (u, c) = comIntExp a
 
 comStm (SIAss (PIdent (_,v)) (IMul a b)) = c
                                            ++ d
                                            ++ [Cmd [] (Mul v t u)]
+                                           where
+                                             (t, c) = comIntExp a
+                                             (u, d) = comIntExp b
+comStm (SIAss (PIdent (_,v)) (IAdd a b)) = c
+                                           ++ d
+                                           ++ [Cmd [] (Add v t u)]
                                            where
                                              (t, c) = comIntExp a
                                              (u, d) = comIntExp b
@@ -115,11 +139,11 @@ jumpT (BExp_TRUE) l = [Cmd [] (Jmp l)]
 jumpT (BNot g) l = jumpF g l
 jumpT (BAnd g h) l = c
                      ++ d
-                     [Cmd [end] Nop]
+                     ++ [Cmd [end] Nop]
                      where end = fresh ()
                            c = jumpF g end
                            d = jumpT g l
-jumpT (BExpPIdent (PIdent (_, v))) l = [Cmd [] (Beqi v 0 end )]
+jumpT (BExpPIdent (PIdent (_, v))) l = [Cmd [] (BeqI v 0 end )]
                                        ++ [Cmd [] (Jmp l)]
                                        ++ [Cmd [end] Nop]
                                        where end = fresh ()
@@ -142,11 +166,11 @@ jumpF (BAnd g h) l = c
                      where
                        c = jumpF g l
                        d = jumpF h l
-jumpF (BExpPIdent (PIdent (_,v))) l = [Cmd [] (Beqi v 0 l)]
+jumpF (BExpPIdent (PIdent (_,v))) l = [Cmd [] (BeqI v 0 l)]
 jumpF (BExp1 g h) l = jumpT (BAnd g h) l
 jumpF (BExp2 g h) l = c
                       ++ d
                       ++ [Cmd [] (Bne v w l)]
                       where
-                        (v, c) = comBexp g
-                        (w, d) = comBexp h
+                        (v, c) = comBExp g
+                        (w, d) = comBExp h

@@ -28,7 +28,9 @@ transInstruction x = case x of
   Lor string1 string2 string3 -> failure x
   Bne string1 string2 string3 -> failure x
   Bge string1 string2 string3 -> failure x
-  AddI string integer1 integer2 -> failure x
-  MulI string integer1 integer2 -> failure x
+  AddI string1 string2 integer -> failure x
+  MulI string1 string2 integer -> failure x
   NegI string integer -> failure x
+  BeqI string1 integer string2 -> failure x
+  BltI string1 integer string2 -> failure x
 

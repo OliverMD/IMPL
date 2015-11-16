@@ -1,0 +1,29 @@
+module Optimisations where
+
+import Compiler
+import AbsM
+import SemM
+
+type CFGraph = [(LineNum, [LineNum])]
+
+eliminateNop :: [Line] -> [Line]
+eliminateNop [] = [] --Should never get [...,Nop] as Hlt must be last instruction!
+eliminateNop ((Cmd x Nop):(Cmd y z):xs) = (Cmd (x++y) z):(eliminateNop xs)
+eliminateNop (x:xs) = x:(eliminateNop xs)
+
+
+cfg :: [Line] -> CFGraph
+cfg x = dfg 0 x x
+
+dfg Int -> [Line] -> [Line] -> CFGraph
+dfg x [] all = []
+dfg x (Cmd _ (Beq _ _ l)):xs all = (Just x, [Just (x + 1), findLineNum all l]):(dfg (x+1) xs all)
+dfg x (Cmd _ Hlt):xs all = (Just x, []):[]
+dfg x (Cmd _ (Blt _ _ l)):xs all = (Just x, [Just (x + 1), findLineNum all l]):(dfg (x+1) xs all)
+dfg x (Cmd _ (Bne _ _ l)):xs all = (Just x, [Just (x + 1), findLineNum all l]):(dfg (x+1) xs all)
+dfg x (Cmd _ (Bge _ _ l)):xs all = (Just x, [Just (x + 1), findLineNum all l]):(dfg (x+1) xs all)
+dfg x (Cmd _ (BeqI _ _ l)):xs all = (Just x, [Just (x + 1), findLineNum all l]):(dfg (x+1) xs all)
+dfg x (Cmd _ (BltI _ _ l)):xs all = (Just x, [Just (x + 1), findLineNum all l]):(dfg (x+1) xs all)
+
+
+dfg x (Cmd _ (Lim _ _)):xs all = (Just x, [Just (x + 1)]):(dfg xs (x+1)) 

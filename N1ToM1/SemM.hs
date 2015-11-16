@@ -38,14 +38,18 @@ run lines (Just p, state, o) = case lines !! p of
                            (Cmd _ (Jmp lab)) -> run lines (findLineNum lines lab, state, o)
                            (Cmd _ (Beq r q l)) -> run lines (if (find r state) == (find q state) then (findLineNum lines l, state, o) else (Just (p + 1), state, o))
                            (Cmd _ (Blt r q l)) -> run lines (if (find r state) <  (find q state) then (findLineNum lines l, state, o) else (Just (p + 1), state, o))
-                           (Cmd _ (Lor r x0 x1)) -> run lines (Just (p+1), update (r, if (find x0 state) || (find x1 state) then 1 else 0) state, o)
-                           (Cmd _ (Bne r q l)) -> run lines (if (find r state) != (find q state) then (findLineNum lines l, state, o) else (Just (p + 1), state, o))
+                           (Cmd _ (Lor r x0 x1)) -> run lines (Just (p+1), update (r, (find x0 state) + (find x1 state)) state, o)
+                           (Cmd _ (Bne r q l)) -> run lines (if (find r state) /= (find q state) then (findLineNum lines l, state, o) else (Just (p + 1), state, o))
                            (Cmd _ (Bge r q l)) -> run lines (if (find r state) > (find q state) then (findLineNum lines l, state, o) else (Just (p + 1), state, o))
-                           (Cmd _ (AddI r x0 x1)) -> run lines (Just (p+1), update (r, (find x0 state) + x1), o)
-                           (Cmd _ (MulI r x0 x1)) -> run lines (Just (p+1), update (r, (find x0 state)*x1), o)
-                           (Cmd _ (NegI r x)) -> run lines (Just (p+1), update (r, (-1) * x), o)
-                           (Cmd _ (Beqi r x l)) -> run lines (if (find r state) == x then (findLineNum lines l, state, o) else (Just (p+1), state, o))
+                           (Cmd _ (AddI r x0 x1)) -> run lines (Just (p+1), update (r, (find x0 state) + x1) state, o)
+                           (Cmd _ (MulI r x0 x1)) -> run lines (Just (p+1), update (r, (find x0 state)*x1) state, o)
+                           (Cmd _ (NegI r x)) -> run lines (Just (p+1), update (r, (-1) * x) state, o)
+                           (Cmd _ (BeqI r x l)) -> run lines (if (find r state) == x then (findLineNum lines l, state, o) else (Just (p+1), state, o))
+                           (Cmd _ (BltI r x l)) -> run lines (if (find r state) < x then (findLineNum lines l, state, o) else (Just (p+1), state, o))
 
 getLines :: [Err Line] -> [Line]
 getLines [] = []
 getLines ((Ok l):xs) = l:(getLines xs)
+
+go :: [Line] -> (LineNum, State, String)
+go x  = run x (Just 0, [], "")

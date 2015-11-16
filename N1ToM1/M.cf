@@ -21,7 +21,9 @@ Blt . Instruction ::= "blt" String String String ; -- if ra < rb then jmp l
 Lor. Instruction ::= "lor" String String String ; -- logical disjunction
 Bne. Instruction ::= "bne" String String String ;
 Bge. Instruction ::= "bge" String String String ;
-AddI. Instruction ::= "addi" String Integer Integer ;
-MulI. Instruction ::= "muli" String Integer Integer ;
+AddI. Instruction ::= "addi" String String Integer ;
+MulI. Instruction ::= "muli" String String Integer ;
 NegI. Instruction ::= "negi" String Integer ;
+BeqI. Instruction ::= "beqi" String Integer String ;
+BltI. Instruction ::= "blti" String Integer String ;
 -- That code is a list of lines will be dealt with in the using programs

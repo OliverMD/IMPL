@@ -26,11 +26,11 @@ Integer literals //Integer// are nonempty sequences of digits.
 The set of reserved words is the set of terminals appearing in the grammar. Those reserved words that consist of non-letter characters are called symbols, and they are treated in a different way from those that are similar to identifiers. The lexer follows rules familiar from languages like Haskell, C, and Java, including longest match and spacing conventions.
 
 The reserved words used in M are the following:
-  | ``add`` | ``addi`` | ``beq`` | ``bge``
-  | ``blt`` | ``bne`` | ``hlt`` | ``jmp``
-  | ``lim`` | ``lor`` | ``mov`` | ``mul``
-  | ``muli`` | ``neg`` | ``negi`` | ``nop``
-  | ``prn`` |  |  | 
+  | ``add`` | ``addi`` | ``beq`` | ``beqi``
+  | ``bge`` | ``blt`` | ``blti`` | ``bne``
+  | ``hlt`` | ``jmp`` | ``lim`` | ``lor``
+  | ``mov`` | ``mul`` | ``muli`` | ``neg``
+  | ``negi`` | ``nop`` | ``prn`` | 
 
 The symbols used in M are the following:
   | :  | ,  | 
@@ -66,8 +66,10 @@ All other symbols are terminals.
   |  |  **|**  | ``lor`` //String// //String// //String// 
   |  |  **|**  | ``bne`` //String// //String// //String// 
   |  |  **|**  | ``bge`` //String// //String// //String// 
-  |  |  **|**  | ``addi`` //String// //Integer// //Integer// 
-  |  |  **|**  | ``muli`` //String// //Integer// //Integer// 
+  |  |  **|**  | ``addi`` //String// //String// //Integer// 
+  |  |  **|**  | ``muli`` //String// //String// //Integer// 
   |  |  **|**  | ``negi`` //String// //Integer// 
+  |  |  **|**  | ``beqi`` //String// //Integer// //String// 
+  |  |  **|**  | ``blti`` //String// //Integer// //String// 
 
 

@@ -23,5 +23,11 @@ data Instruction
     | Beq String String String
     | Blt String String String
     | Lor String String String
+    | Bne String String String
+    | Bge String String String
+    | AddI String String Integer
+    | MulI String String Integer
+    | NegI String Integer
+    | BeqI String Integer String
   deriving (Eq, Ord, Show, Read)
 

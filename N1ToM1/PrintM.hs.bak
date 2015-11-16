@@ -88,7 +88,7 @@ instance Print Line where
 instance Print Instruction where
   prt i e = case e of
     Nop -> prPrec i 0 (concatD [doc (showString "nop")])
-    Hlt -> prPrec i 0 (concatD [doc (showString " hlt ")])
+    Hlt -> prPrec i 0 (concatD [doc (showString "hlt")])
     Lim str n -> prPrec i 0 (concatD [doc (showString "lim"), prt 0 str, prt 0 n])
     Mov str1 str2 -> prPrec i 0 (concatD [doc (showString "mov"), prt 0 str1, prt 0 str2])
     Add str1 str2 str3 -> prPrec i 0 (concatD [doc (showString "add"), prt 0 str1, prt 0 str2, prt 0 str3])
@@ -97,7 +97,13 @@ instance Print Instruction where
     Prn str -> prPrec i 0 (concatD [doc (showString "prn"), prt 0 str])
     Jmp str -> prPrec i 0 (concatD [doc (showString "jmp"), prt 0 str])
     Beq str1 str2 str3 -> prPrec i 0 (concatD [doc (showString "beq"), prt 0 str1, prt 0 str2, prt 0 str3])
-    Blt str1 str2 str3 -> prPrec i 0 (concatD [doc (showString " blt "), prt 0 str1, prt 0 str2, prt 0 str3])
-    Lor str1 str2 str3 -> prPrec i 0 (concatD [doc (showString " lor "), prt 0 str1, prt 0 str2, prt 0 str3])
+    Blt str1 str2 str3 -> prPrec i 0 (concatD [doc (showString "blt"), prt 0 str1, prt 0 str2, prt 0 str3])
+    Lor str1 str2 str3 -> prPrec i 0 (concatD [doc (showString "lor"), prt 0 str1, prt 0 str2, prt 0 str3])
+    Bne str1 str2 str3 -> prPrec i 0 (concatD [doc (showString "bne"), prt 0 str1, prt 0 str2, prt 0 str3])
+    Bge str1 str2 str3 -> prPrec i 0 (concatD [doc (showString "bge"), prt 0 str1, prt 0 str2, prt 0 str3])
+    AddI str1 str2 n -> prPrec i 0 (concatD [doc (showString "addi"), prt 0 str1, prt 0 str2, prt 0 n])
+    MulI str1 str2 n -> prPrec i 0 (concatD [doc (showString "muli"), prt 0 str1, prt 0 str2, prt 0 n])
+    NegI str n -> prPrec i 0 (concatD [doc (showString "negi"), prt 0 str, prt 0 n])
+    BeqI str1 n str2 -> prPrec i 0 (concatD [doc (showString "beqi"), prt 0 str1, prt 0 n, prt 0 str2])
 
 

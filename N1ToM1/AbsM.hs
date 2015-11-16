@@ -28,6 +28,7 @@ data Instruction
     | AddI String String Integer
     | MulI String String Integer
     | NegI String Integer
-    | Beqi String Integer String
+    | BeqI String Integer String
+    | BltI String Integer String
   deriving (Eq, Ord, Show, Read)
 
